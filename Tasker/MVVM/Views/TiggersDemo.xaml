@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tasker.MVVM.Views.TiggersDemo"
+             xmlns:local="clr-namespace:Tasker.MVVM.Views"
+             Title="TiggersDemo">
+    <VerticalStackLayout>
+        <Label 
+            Text="Welcome to .NET MAUI!"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Entry x:Name="entry"
+       Text=""
+       Placeholder="Enter text" />
+        <Button Text="Save">
+            <Button.Triggers>
+                <DataTrigger TargetType="Button"
+                     Binding="{Binding Source={x:Reference entry},
+                                       Path=Text.Length}"
+                     Value="0">
+                    <Setter Property="IsEnabled"
+                    Value="False" />
+                    <!-- Multiple Setter elements are allowed -->
+                </DataTrigger>
+            </Button.Triggers>
+        </Button>
+        <Entry Placeholder="Enter job title">
+            <Entry.Triggers>
+                <Trigger TargetType="Entry"
+                 Property="Entry.IsFocused"
+                 Value="True">
+                    <Trigger.EnterActions>
+                        <local:FadeTriggerAction StartsFrom="0" />
+                    </Trigger.EnterActions>
+
+                    <Trigger.ExitActions>
+                        <local:FadeTriggerAction StartsFrom="1" />
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Entry.Triggers>
+        </Entry>
+    </VerticalStackLayout>
+</ContentPage>
