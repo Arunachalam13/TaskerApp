@@ -9,7 +9,8 @@ public partial class App : Application
 		InitializeComponent();
 
         //MainPage = new AppShell();
-        //MainPage = new MainView();
-        MainPage = new TiggersDemo();
+        MainPage = new NavigationPage(new MainView());
+        //MainPage = new TiggersDemo();
+        //MainPage = new NewTaskView();
     }
 }

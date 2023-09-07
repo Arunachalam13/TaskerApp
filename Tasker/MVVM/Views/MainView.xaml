@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Tasker.MVVM.Views.MainView"
              xmlns:converter="clr-namespace:Tasker.Converters"
-             Title="MainView">
+             Title="Tasker">
     <ContentPage.Resources>
         <converter:ColorConverter x:Key="ColorConvert"/>
     </ContentPage.Resources>
@@ -36,7 +36,8 @@
         </Grid>
         <Grid Grid.Row="2" RowDefinitions=".2*,.8*">
             <Label StyleClass="LightBlue, SubHeader" Text="PENDING TASKS"/>
-            <CollectionView Grid.Row="1" ItemsSource="{Binding Tasks}">
+            <CollectionView Grid.Row="1" ItemsSource="{Binding Tasks}"
+                            ItemsUpdatingScrollMode="KeepLastItemInView">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame BorderColor="Transparent">
@@ -44,6 +45,7 @@
                                 <CheckBox x:Name="checkbox"
                                           IsChecked="{Binding Completed}"
                                           VerticalOptions="Center"
+                                          CheckedChanged="checkbox_CheckedChanged"
                                           Color="{Binding TaskColor, Converter={StaticResource ColorConvert}}"/>
                                 <Label Text="{Binding TaskName}" VerticalOptions="Center">
                                     <Label.Triggers>
@@ -60,5 +62,9 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </Grid>
+        <Button Text="+"
+                Grid.Row="2"
+                Clicked="Button_Clicked"
+                Style="{StaticResource CircularButton}"/>
     </Grid>
 </ContentPage>

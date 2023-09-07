@@ -60,6 +60,9 @@
 	  <MauiXaml Update="MVVM\Views\MainView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Views\NewTaskView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\TiggersDemo.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

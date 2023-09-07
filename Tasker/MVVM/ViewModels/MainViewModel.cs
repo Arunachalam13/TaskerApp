@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,13 +9,18 @@ using Tasker.MVVM.Models;
 
 namespace Tasker.MVVM.ViewModels
 {
-    public class MainViewModel
+    public class MainViewModel 
     {
         public ObservableCollection<Category> Categories {get; set;}
         public ObservableCollection<MyTask> Tasks { get; set; }
         public MainViewModel()
         {
             FillData();
+            Tasks.CollectionChanged += Tasks_CollecionChanged;
+        }
+
+        private void Tasks_CollecionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
             UpdateData();
         }
 
@@ -87,7 +93,7 @@ namespace Tasker.MVVM.ViewModels
                     CategoryId = 3,
                 },
             };
-
+            UpdateData();
         }
 
         public void UpdateData()
@@ -104,7 +110,7 @@ namespace Tasker.MVVM.ViewModels
                                    where t.Completed == false
                                    select t;
                 c.PendingTasks = notCompleted.Count();
-                c.Percentage = (float)completed.Count()/(float)Tasks.Count();
+                c.Percentage = (float)completed.Count()/(float)tasks.Count();
             }
             foreach(var t in Tasks)
             {
